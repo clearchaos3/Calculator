@@ -11,12 +11,63 @@ class GlobalEnvironment: ObservableObject {
     @Published var display = "0"
     
     func receiveInput(calculatorButton: String){
-        if(self.display == "0") {
+        if(calculatorButton == "<3"){
+            self.display = "<3"
+        }
+        if(self.display == "0" || self.display == "<3") {
             self.display = ""
         }
         self.display += calculatorButton
     }
+    
+    func clearInput(){
+        self.display = "0"
+    }
 }
+
+extension Color {
+    static let offWhite = Color(red: 255, green: 255, blue: 255)
+}
+
+extension LinearGradient {
+    init(_ colors: Color...) {
+        self.init(gradient: Gradient(colors: colors), startPoint: .topLeading, endPoint: .bottomTrailing)
+    }
+}
+
+struct SimpleButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .padding(30)
+            .background(
+                Group {
+                    if configuration.isPressed {
+                        Circle()
+                            .fill(Color.offWhite)
+                            .frame(width: 60, height: 60)
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.gray, lineWidth: 4)
+                                    .blur(radius: 4)
+                                    .offset(x: 2, y: 2)
+                                    .mask(Circle().fill(LinearGradient(Color.black, Color.clear)))
+                            )
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 8)
+                                    .blur(radius: 4)
+                                    .offset(x: -2, y: -2)
+                                    .mask(Circle().fill(LinearGradient(Color.clear, Color.black)))
+                            )
+                    } else {
+                        Circle()
+                            .fill(Color.offWhite)
+                    }
+                }
+            )
+    }
+}
+
 
 struct ContentView: View {
     
@@ -24,75 +75,137 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            Color(.systemGroupedBackground)
+            Color.offWhite
                 .edgesIgnoringSafeArea(.all)
-            VStack {
+            VStack{
                 HStack {
                     Text(env.display)
                         .multilineTextAlignment(.trailing)
                 }
                 HStack{
-                    Alt(alt: "AC")
-                    Alt(alt: "+/-")
-                    Alt(alt: "%")
-                    Operator(op: "÷")
+                    Spacer()
+                    Button(action: {self.env.clearInput()}){
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                    }
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
+                    Button(action: {}){
+                        Image(systemName: "plus.slash.minus")
+                            .foregroundColor(.blue)
+                    }
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
+                    Button(action: {}){
+                        Image(systemName: "percent")
+                            .foregroundColor(.blue)
+                    }
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
+                    Button(action: {self.env.clearInput()}){
+                        Image(systemName: "divide")
+                            .foregroundColor(.blue)
+                    }
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
                 }
                 HStack{
+                    Spacer()
                     Button(action: {self.env.receiveInput(calculatorButton: "7")}){
-                        Digit(digit: "7")
+                        Text("7")
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
                     Button(action: {self.env.receiveInput(calculatorButton: "8")}){
-                        Digit(digit: "8")
+                        Text("8")
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
                     Button(action: {self.env.receiveInput(calculatorButton: "9")}){
-                        Digit(digit: "9")
+                        Text("9")
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    Operator(op: "X")
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
+                    Button(action: {self.env.clearInput()}){
+                        Image(systemName: "multiply")
+                            .foregroundColor(.blue)
+                    }
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
                 }
                 
                 HStack{
+                    Spacer()
                     Button(action: {self.env.receiveInput(calculatorButton: "4")}){
-                        Digit(digit: "4")
+                        Text("4")
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
                     Button(action: {self.env.receiveInput(calculatorButton: "5")}){
-                        Digit(digit: "5")
+                        Text("5")
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
                     Button(action: {self.env.receiveInput(calculatorButton: "6")}){
-                        Digit(digit: "6")
+                        Text("6")
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    Operator(op: "-")
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
+                    Button(action: {self.env.clearInput()}){
+                        Image(systemName: "minus")
+                            .foregroundColor(.blue)
+                    }
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
                 }
                 HStack{
+                    Spacer()
                     Button(action: {self.env.receiveInput(calculatorButton: "1")}){
-                        Digit(digit: "1")
+                        Text("1")
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
                     Button(action: {self.env.receiveInput(calculatorButton: "2")}){
-                        Digit(digit: "2")
+                        Text("2")
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
                     Button(action: {self.env.receiveInput(calculatorButton: "3")}){
-                        Digit(digit: "3")
+                        Text("3")
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    Operator(op: "+")
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
+                    Button(action: {self.env.clearInput()}){
+                        Image(systemName: "plus")
+                            .foregroundColor(.blue)
+                    }
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
                 }
                 HStack{
+                    Spacer()
                     Button(action: {self.env.receiveInput(calculatorButton: "0")}){
-                        Capsule()
-                            .frame(width: 130, height: 60)
-                            .foregroundColor(Color(.tertiarySystemBackground))
-                            .overlay(Text("0"))
+                        Text("0")
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    Digit(digit: ".")
-                    Operator(op: "=")
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
+                    Button(action: {self.env.receiveInput(calculatorButton: "3")}){
+                        Text(".")
+                    }
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
+                    Button(action: {self.env.clearInput()}){
+                        Image(systemName: "equal")
+                            .foregroundColor(.green)
+                    }
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
+                    Button(action: {self.env.receiveInput(calculatorButton: "<3")}){
+                        Image(systemName: "heart")
+                            .foregroundColor(.yellow)
+                    }
+                    .buttonStyle(SimpleButtonStyle())
+                    Spacer()
                 }
             }
             .font(.headline)
