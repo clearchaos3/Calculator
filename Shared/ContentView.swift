@@ -26,7 +26,7 @@ class GlobalEnvironment: ObservableObject {
 }
 
 extension Color {
-    static let offWhite = Color(red: 255, green: 255, blue: 255)
+    static let offWhite = Color(.systemBackground)
 }
 
 extension LinearGradient {
@@ -72,6 +72,7 @@ struct SimpleButtonStyle: ButtonStyle {
 struct ContentView: View {
     
     @EnvironmentObject var env: GlobalEnvironment
+    @State var showingDetail = false
     
     var body: some View {
         ZStack {
@@ -200,9 +201,11 @@ struct ContentView: View {
                     }
                     .buttonStyle(SimpleButtonStyle())
                     Spacer()
-                    Button(action: {self.env.receiveInput(calculatorButton: "<3")}){
+                    Button(action: {self.showingDetail.toggle()}){
                         Image(systemName: "heart")
                             .foregroundColor(.yellow)
+                    }.sheet(isPresented: $showingDetail) {
+                        HeartView()
                     }
                     .buttonStyle(SimpleButtonStyle())
                     Spacer()
@@ -216,7 +219,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .preferredColorScheme(.light)
             .environmentObject(GlobalEnvironment())
             
     }

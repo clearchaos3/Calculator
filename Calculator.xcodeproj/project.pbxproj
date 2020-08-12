@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D58A01624E4726900A2B414 /* HeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D58A01524E4726900A2B414 /* HeartView.swift */; };
+		2D58A01724E4726900A2B414 /* HeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D58A01524E4726900A2B414 /* HeartView.swift */; };
 		2D8CE54B24B74F3D00DFD7C8 /* CalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CE53824B74F3C00DFD7C8 /* CalculatorApp.swift */; };
 		2D8CE54C24B74F3D00DFD7C8 /* CalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CE53824B74F3C00DFD7C8 /* CalculatorApp.swift */; };
 		2D8CE54D24B74F3D00DFD7C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CE53924B74F3C00DFD7C8 /* ContentView.swift */; };
@@ -16,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D58A01524E4726900A2B414 /* HeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartView.swift; sourceTree = "<group>"; };
 		2D8CE53824B74F3C00DFD7C8 /* CalculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorApp.swift; sourceTree = "<group>"; };
 		2D8CE53924B74F3C00DFD7C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2D8CE53A24B74F3D00DFD7C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 			children = (
 				2D8CE53824B74F3C00DFD7C8 /* CalculatorApp.swift */,
 				2D8CE53924B74F3C00DFD7C8 /* ContentView.swift */,
+				2D58A01524E4726900A2B414 /* HeartView.swift */,
 				2D8CE53A24B74F3D00DFD7C8 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -188,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D8CE54D24B74F3D00DFD7C8 /* ContentView.swift in Sources */,
+				2D58A01624E4726900A2B414 /* HeartView.swift in Sources */,
 				2D8CE54B24B74F3D00DFD7C8 /* CalculatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D8CE54E24B74F3D00DFD7C8 /* ContentView.swift in Sources */,
+				2D58A01724E4726900A2B414 /* HeartView.swift in Sources */,
 				2D8CE54C24B74F3D00DFD7C8 /* CalculatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
