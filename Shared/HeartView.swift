@@ -41,7 +41,14 @@ struct HeartView: View {
                     }
                 }
                 Spacer()
-                Link("@Supleezy", destination: URL(string: "https://www.twitter.com/supleezy")!)
+                HStack {
+                    Image("Twitter_Logo_Blue")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                    Link("@Supleezy", destination: URL(string: "https://www.twitter.com/supleezy")!)
+                        .foregroundColor(Color(red: 74/255, green: 161/255, blue: 236/255))
+                        .font(Font.system(.callout, design: .rounded).weight(.heavy))
+                }
                 Spacer()
             }
         }
@@ -52,6 +59,8 @@ struct HeartView: View {
 struct HeartView_Previews: PreviewProvider {
     static var previews: some View {
         HeartView()
+            
+            
             
     }
 }
