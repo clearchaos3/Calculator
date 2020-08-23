@@ -16,10 +16,6 @@ class GlobalEnvironment: ObservableObject {
         if(calculatorButton == "<3"){
             self.display = "<3"
         }
-        if(calculatorButton == "."){
-            self.display += ""
-        }
-        
         if(self.display == "0" || self.display == "<3") {
             self.display = ""
         }
