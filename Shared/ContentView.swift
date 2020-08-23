@@ -9,6 +9,8 @@ import SwiftUI
 
 class GlobalEnvironment: ObservableObject {
     @Published var display = "0"
+    @Published var display2 = "0"
+    @Published var operation = "."
     
     func receiveInput(calculatorButton: String){
         if(calculatorButton == "<3"){
@@ -20,8 +22,26 @@ class GlobalEnvironment: ObservableObject {
         self.display += calculatorButton
     }
     
+    func doOperation(calculatorButton: String){
+        if(calculatorButton != "="){
+            self.display2 = self.display
+            self.display = "0"
+            self.operation = calculatorButton
+        }
+        if(calculatorButton == "="){
+            switch self.operation {
+            case "+": self.display = String((self.display2 as NSString).integerValue + (self.display as NSString).integerValue)
+            case "-": self.display = String((self.display2 as NSString).integerValue - (self.display as NSString).integerValue)
+            case "*": self.display = String((self.display2 as NSString).integerValue * (self.display as NSString).integerValue)
+            case "/": self.display = String((self.display2 as NSString).integerValue / (self.display as NSString).integerValue)
+            default: self.display += ""
+            }
+        }
+    }
+    
     func clearInput(){
         self.display = "0"
+        self.display2 = "0"
     }
 }
 
@@ -79,6 +99,11 @@ struct ContentView: View {
             Color.offWhite
                 .edgesIgnoringSafeArea(.all)
             VStack{
+                
+                Text(env.display2)
+                    .foregroundColor(Color.secondary)
+                    .opacity(0.5)
+                    .multilineTextAlignment(.trailing)
                 HStack {
                     Text(env.display)
                         .multilineTextAlignment(.trailing)
@@ -103,7 +128,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(SimpleButtonStyle())
                     Spacer()
-                    Button(action: {self.env.clearInput()}){
+                    Button(action: {self.env.doOperation(calculatorButton: "/")}){
                         Image(systemName: "divide")
                             .foregroundColor(.blue)
                     }
@@ -127,7 +152,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(SimpleButtonStyle())
                     Spacer()
-                    Button(action: {self.env.clearInput()}){
+                    Button(action: {self.env.doOperation(calculatorButton: "*")}){
                         Image(systemName: "multiply")
                             .foregroundColor(.blue)
                     }
@@ -152,7 +177,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(SimpleButtonStyle())
                     Spacer()
-                    Button(action: {self.env.clearInput()}){
+                    Button(action: {self.env.doOperation(calculatorButton: "-")}){
                         Image(systemName: "minus")
                             .foregroundColor(.blue)
                     }
@@ -176,7 +201,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(SimpleButtonStyle())
                     Spacer()
-                    Button(action: {self.env.clearInput()}){
+                    Button(action: {self.env.doOperation(calculatorButton: "+")}){
                         Image(systemName: "plus")
                             .foregroundColor(.blue)
                     }
@@ -195,7 +220,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(SimpleButtonStyle())
                     Spacer()
-                    Button(action: {self.env.clearInput()}){
+                    Button(action: {self.env.doOperation(calculatorButton: "=")}){
                         Image(systemName: "equal")
                             .foregroundColor(.green)
                     }
