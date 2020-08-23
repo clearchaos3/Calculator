@@ -16,6 +16,10 @@ class GlobalEnvironment: ObservableObject {
         if(calculatorButton == "<3"){
             self.display = "<3"
         }
+        if(calculatorButton == "."){
+            self.display += ""
+        }
+        
         if(self.display == "0" || self.display == "<3") {
             self.display = ""
         }
@@ -30,10 +34,10 @@ class GlobalEnvironment: ObservableObject {
         }
         if(calculatorButton == "="){
             switch self.operation {
-            case "+": self.display = String((self.display2 as NSString).integerValue + (self.display as NSString).integerValue)
-            case "-": self.display = String((self.display2 as NSString).integerValue - (self.display as NSString).integerValue)
-            case "*": self.display = String((self.display2 as NSString).integerValue * (self.display as NSString).integerValue)
-            case "/": self.display = String((self.display2 as NSString).integerValue / (self.display as NSString).integerValue)
+            case "+": self.display = String((self.display2 as NSString).doubleValue + (self.display as NSString).doubleValue)
+            case "-": self.display = String((self.display2 as NSString).doubleValue - (self.display as NSString).doubleValue)
+            case "*": self.display = String((self.display2 as NSString).doubleValue * (self.display as NSString).doubleValue)
+            case "/": self.display = String((self.display2 as NSString).doubleValue / (self.display as NSString).doubleValue)
             default: self.display += ""
             }
         }
@@ -215,7 +219,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(SimpleButtonStyle())
                     Spacer()
-                    Button(action: {self.env.receiveInput(calculatorButton: "3")}){
+                    Button(action: {self.env.receiveInput(calculatorButton: ".")}){
                         Text(".")
                     }
                     .buttonStyle(SimpleButtonStyle())
