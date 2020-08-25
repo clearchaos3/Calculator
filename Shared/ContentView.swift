@@ -9,7 +9,7 @@ import SwiftUI
 
 class GlobalEnvironment: ObservableObject {
     @Published var display = "0"
-    @Published var display2 = "0"
+    @Published var display2 = " "
     @Published var operation = "."
     
     func receiveInput(calculatorButton: String){
@@ -41,7 +41,7 @@ class GlobalEnvironment: ObservableObject {
     
     func clearInput(){
         self.display = "0"
-        self.display2 = "0"
+        self.display2 = " "
     }
 }
 
@@ -99,14 +99,14 @@ struct ContentView: View {
             Color.offWhite
                 .edgesIgnoringSafeArea(.all)
             VStack{
-                
-                Text(env.display2)
-                    .foregroundColor(Color.secondary)
-                    .opacity(0.5)
-                    .multilineTextAlignment(.trailing)
                 HStack {
-                    Text(env.display)
-                        .multilineTextAlignment(.trailing)
+                    VStack {
+                        Text(env.display2)
+                            .foregroundColor(Color.secondary)
+                            .opacity(0.5)
+                        Text(env.display == "8008135" ? "boobies" : env.display)
+                    }
+                    .multilineTextAlignment(.trailing)
                 }
                 HStack{
                     Spacer()
@@ -244,7 +244,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(GlobalEnvironment())
+            .environmentObject(GlobalEnvironment()).preferredColorScheme(.dark)
             
     }
 }
